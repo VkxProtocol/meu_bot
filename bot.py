@@ -11,7 +11,9 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 # Configurações do Telegram
-TOKEN = '[REDACTED_SECRET]'
+TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
+if not TOKEN:
+    raise RuntimeError('TELEGRAM_BOT_TOKEN não configurado no ambiente')
 GROUP_CHAT_ID = '-1002405955713'
 WEBHOOK_URL = os.getenv('WEBHOOK_URL', 'https://meu-bot1.onrender.com/webhook')
 PORT = int(os.getenv('PORT', 8443))
